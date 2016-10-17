@@ -1,0 +1,12 @@
+{% if output %}
+    <ul>
+    {% for out_element in output %}
+        <li><a href="#">{{ out_element.vocab }}</a></li>
+        <li><a href="#">{{ out_element.pronunciation }}</a></li>
+        <li><a href="#">{{ out_element.meaning }}</a></li>
+        <li><a href="#">{{ out_element.frequency }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No vocabulary available.</p>
+{% endif %}

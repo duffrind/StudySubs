@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	 {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Study Subs">
+    <meta name="author" content="David Duffrin">
+
+    <title>Study Subs</title>
+
+    <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+
+    <!-- jQuery CDN -->
+    <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="   crossorigin="anonymous"></script>
+
+   <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<style>
+		body {
+    		padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+		}
+
+		.portfolio-item {
+		    margin-bottom: 25px;
+		}
+
+		footer {
+		    margin: 50px 0;
+		}
+
+	</style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	 <link rel="shortcut icon" type="image/png" href="{%  static 'subs/icon.ico' %}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href='/' class="navbar-brand">Study Subs</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1>Register</h1> <!-- Welcome, %User! -->
+        <div class="jumbotron">
+          <h2>You will be prompted to login after a successful new user registration.</h2><br><br>
+            {% if form.errors %}
+              <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+              {% endif %}
+              <form method="post" action="" class="wide">
+                {% csrf_token %}
+                <p>
+                  <label for="id_username">Username:</label>
+                  {% if form.username.errors %}
+                    <p class="errors">{{ form.username.errors.as_text }}</p>
+                  {% endif %}
+                  {{ form.username }}
+                </p>
+                <p>
+                  <label for="id_password1">Password:</label>
+                  {% if form.password1.errors %}
+                    <p class="errors">{{ form.password1.errors.as_text }}</p>
+                  {% endif %}
+                  {{ form.password1 }}
+                </p>
+                <p>
+                  <label for="id_password2">Password (type again to catch typos):</label>
+                  {% if form.password2.errors %}
+                    <p class="errors">{{ form.password2.errors.as_text }}</p>
+                  {% endif %}
+                  {{ form.password2 }}
+                </p>
+                <p class="submit"><input type="submit" value="Register"></p>
+              </form>
+        <!--    <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+            </form>   -->
+            <hr>
+            <p>Already a member? <a href="{% url 'login' %}">Login</a>!</p>
+         </div>
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; David Duffrin 2016</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+</body>
+
+</html>

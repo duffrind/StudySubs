@@ -43,7 +43,22 @@ def index(request):
       if form.is_valid():
          file = request.FILES['file']
          s = file.read()
-         m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('UTF8'))
+         try:
+            m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode(file.encoding))
+         except:
+            try:
+               m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('UTF8'))
+            except:
+               try:
+                  m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('UTF16'))
+               except:
+                  try:
+                     m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('SHIFT-JIS'))
+                  except:
+                     try:
+                        m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('EUC-JP'))
+                     except:
+                        m = re.findall("""[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9faf\uff62-\uff9f].*\n?""" , s.decode('UTF32'))
          request.session['m'] = m
          return HttpResponseRedirect('/upload')
    else:

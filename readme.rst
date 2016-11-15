@@ -27,7 +27,6 @@ Quick start
 =======
         'subs',
     ]
->>>>>>> f14b0c72f82e56296969ef66a71c881216efa0f1
 
 2. Include the subs URLconf in your project urls.py like this::
 
